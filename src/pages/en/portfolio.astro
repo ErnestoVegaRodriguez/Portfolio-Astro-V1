@@ -3,24 +3,7 @@ import Layout from "@/layouts/Layout.astro";
 import Head from "@/components/Head.astro";
 import Title from "@/components/Title.astro";
 import { Image } from "astro:assets";
-import hotel_1 from "/src/assets/img/hotel-jade-website-1.webp";
-import hotel_2 from "/src/assets/img/hotel-jade-website-2.webp";
-import hotel_3 from "/src/assets/img/hotel-jade-website-3.webp";
-import hotel_4 from "/src/assets/img/hotel-jade-website-4.webp";
-import hotel_5 from "/src/assets/img/hotel-jade-website-5.webp";
-import hotel_6 from "/src/assets/img/hotel-jade-website-6.webp";
-import solitel_1 from "/src/assets/img/solitel-website-1.webp";
-import solitel_2 from "/src/assets/img/solitel-website-2.webp";
-import solitel_3 from "/src/assets/img/solitel-website-3.webp";
-import solitel_4 from "/src/assets/img/solitel-website-4.webp";
-import solitel_5 from "/src/assets/img/solitel-website-5.webp";
-import cupones_1 from "/src/assets/img/cupones-max-website-1.webp";
-import cupones_2 from "/src/assets/img/cupones-max-website-2.webp";
-import cupones_3 from "/src/assets/img/cupones-max-website-3.webp";
-import cupones_4 from "/src/assets/img/cupones-max-website-4.webp";
-import cupones_5 from "/src/assets/img/cupones-max-website-5.webp";
-import cupones_6 from "/src/assets/img/cupones-max-website-6.webp";
-import blur from "/src/assets/img/bg.png";
+import blur from "/public/images/bg.png";
 import PortfolioCard from "@/components/PortfolioCard.astro";
 import { getAbsoluteLocaleUrl } from "astro:i18n";
 
@@ -49,7 +32,14 @@ let title = Astro.props;
     <div class="grid grid-rows-auto content-center gap-5 pb-10 mt-12">
       <PortfolioCard
         title="Jade Hotel System"
-        img={[hotel_1, hotel_2, hotel_3, hotel_4, hotel_5, hotel_6]}
+        img={[
+          "https://res.cloudinary.com/dks1ifnxa/image/upload/v1772563140/hotel-jade-website-1_xl43zn.webp", 
+          "https://res.cloudinary.com/dks1ifnxa/image/upload/v1772563139/hotel-jade-website-2_cflsbd.webp", 
+          "https://res.cloudinary.com/dks1ifnxa/image/upload/v1772563137/hotel-jade-website-3_osjt2m.webp", 
+          "https://res.cloudinary.com/dks1ifnxa/image/upload/v1772563137/hotel-jade-website-4_vucszn.webp", 
+          "https://res.cloudinary.com/dks1ifnxa/image/upload/v1772563138/hotel-jade-website-5_yesm3q.webp", 
+          "https://res.cloudinary.com/dks1ifnxa/image/upload/v1772563139/hotel-jade-website-6_edecgx.webp"
+        ]}
         alt={title}
         codeLink="https://github.com/ErnestoVegaRodriguez/PROYECTO_INGENIERIA_GRUPO_JAHE_FRONTEND.git"
         badgeLinkProps={[
@@ -68,7 +58,13 @@ let title = Astro.props;
 
       <PortfolioCard
         title="SOLITEL Request Management System"
-        img={[solitel_1, solitel_2, solitel_3, solitel_4, solitel_5]}
+        img={[
+          "https://res.cloudinary.com/dks1ifnxa/image/upload/v1772563159/solitel-website-1_w5fb75.webp", 
+          "https://res.cloudinary.com/dks1ifnxa/image/upload/v1772563160/solitel-website-2_fn702j.webp", 
+          "https://res.cloudinary.com/dks1ifnxa/image/upload/v1772563161/solitel-website-3_hgjd1w.webp", 
+          "https://res.cloudinary.com/dks1ifnxa/image/upload/v1772563158/solitel-website-4_uzknrp.webp", 
+          "https://res.cloudinary.com/dks1ifnxa/image/upload/v1772563158/solitel-website-5_ofovmh.webp"
+        ]}
         alt={title}
         codeLink="https://github.com/ErnestoVegaRodriguez/Solitel-Frontend.git"
         badgeLinkProps={[
@@ -86,7 +82,14 @@ let title = Astro.props;
 
       <PortfolioCard
         title="Max Coupons System"
-        img={[cupones_1, cupones_2, cupones_3, cupones_4, cupones_5, cupones_6]}
+        img={[
+          "https://res.cloudinary.com/dks1ifnxa/image/upload/v1772563110/cupones-max-website-1_xvx0kn.webp", 
+          "https://res.cloudinary.com/dks1ifnxa/image/upload/v1772563111/cupones-max-website-2_cf57dr.webp", 
+          "https://res.cloudinary.com/dks1ifnxa/image/upload/v1772563111/cupones-max-website-3_nssent.webp", 
+          "https://res.cloudinary.com/dks1ifnxa/image/upload/v1772563111/cupones-max-website-4_hzffev.webp", 
+          "https://res.cloudinary.com/dks1ifnxa/image/upload/v1772563112/cupones-max-website-5_zmtejh.webp", 
+          "https://res.cloudinary.com/dks1ifnxa/image/upload/v1772563112/cupones-max-website-6_fwslsr.webp"
+        ]}
         alt={title}
         codeLink="https://github.com/ErnestoVegaRodriguez/Proyecto2-Sistema-Venta-Cupones.git"
         badgeLinkProps={[

@@ -1,7 +1,7 @@
 ---
 import { Image, Picture } from "astro:assets";
-import logo from "/src/assets/img/logo.webp";
-import blur from "/src/assets/img/bg.svg";
+import logo from "/public/images/logo.webp";
+import blur from "/public/images/bg.svg";
 import SwitchLang from "./SwitchLang.astro";
 import { getLangFromUrl, useTranslations } from '@/i18n/utils';
 
@@ -28,7 +28,7 @@ const t = useTranslations(lang);
     >
       <Image
         id="menu-icon"
-        src="/src/assets/img/menu.svg"
+        src="/public/images/menu.svg"
         width="34"
         height="34"
         alt="menu"
