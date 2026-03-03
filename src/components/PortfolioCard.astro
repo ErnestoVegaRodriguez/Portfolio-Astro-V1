@@ -1,5 +1,5 @@
 ---
-import { Picture } from "astro:assets";
+import { Image } from "astro:assets";
 import BadgeLink from "./BadgeLink.astro";
 import Badge from "./Badge.astro";
 import Button from "./Button.astro";
@@ -26,13 +26,12 @@ const carouselId = `carousel-${Math.random().toString(36).substr(2, 9)}`;
             <div
               class={`carousel-slide-${carouselId} absolute inset-0 transition-all duration-700 ease-in-out`}
             >
-              <Picture
+              <Image
                 class="object-cover object-center w-full h-full rounded-2xl"
                 src={image}
                 width="500"
                 height="350"
                 alt={`${title} - ${index + 1}`}
-                formats={["avif", "webp"]}
               />
             </div>
           ))

@@ -2,8 +2,7 @@ import { defineConfig } from 'astro/config';
 import mdx from "@astrojs/mdx";
 import compress from "astro-compress";
 import tailwind from "@astrojs/tailwind";
-
-import cloudflare from "@astrojs/cloudflare";
+//import vercel from '@astrojs/vercel';
 
 // https://astro.build/config
 export default defineConfig({
@@ -36,12 +35,6 @@ export default defineConfig({
   experimental: {
     clientPrerender: true
   },
-  output: "hybrid",
-  adapter: cloudflare({ 
-    mode: 'directory',
-    functionPerRoute: true,
-    routes: {
-      strategy: 'auto'
-    } 
-  })
+  //output: "hybrid",
+  //adapter: vercel(),
 });

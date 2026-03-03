@@ -5,20 +5,20 @@ import Title from "@/components/Title.astro";
 import { Image } from "astro:assets";
 import blur from "/public/images/bg.png";
 import PortfolioCard from "@/components/PortfolioCard.astro";
-import { getAbsoluteLocaleUrl } from "astro:i18n";
+// import { getAbsoluteLocaleUrl } from "astro:i18n";
 
-getAbsoluteLocaleUrl("en");
-export const prerender = true;
+// getAbsoluteLocaleUrl("en");
+// export const prerender = true;
 
 let title = Astro.props;
 ---
 
-<Head
+
+<Layout 
   title="Portfolio"
-  description="Proyectos y trabajos destacados de Ernesto Vega"
+  description="Featured projects and work of Ernesto Vega"
   author="Ernesto Vega Rodriguez"
-/>
-<Layout class="relative">
+class="relative">
   <div class="grid mt-[11.1111%] content-center">
     <Title text="Portfolio" />
   </div>

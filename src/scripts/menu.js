@@ -18,10 +18,10 @@ document.addEventListener('DOMContentLoaded', function () {
 		let newSrc = '';
 
 		// Определение нового значения атрибута src
-		if (currentSrc === '/public/images/menu.svg') {
-			newSrc = '/public/images/close.svg';
+		if (currentSrc === '/images/menu.svg') {
+			newSrc = '/images/close.svg';
 		} else {
-			newSrc = '/public/images/menu.svg';
+			newSrc = '/images/menu.svg';
 		}
 
 		// Изменение значения атрибута src
@@ -51,10 +51,10 @@ document.addEventListener('DOMContentLoaded', function () {
 			let newSrc = '';
 
 			// Определение нового значения атрибута src
-			if (currentSrc === '/public/images/menu.svg') {
-				newSrc = '/public/images/close.svg';
+			if (currentSrc === '/images/menu.svg') {
+				newSrc = '/images/close.svg';
 			} else {
-				newSrc = '/public/images/menu.svg';
+				newSrc = '/images/menu.svg';
 			}
 		});
 	});

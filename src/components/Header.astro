@@ -1,9 +1,7 @@
 ---
-import { Image, Picture } from "astro:assets";
-import logo from "/public/images/logo.webp";
-import blur from "/public/images/bg.svg";
+import { Image } from "astro:assets";
 import SwitchLang from "./SwitchLang.astro";
-import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -13,11 +11,18 @@ const t = useTranslations(lang);
 <nav
   transition:persist="nav"
   transition:name="nav"
-  class="container fixed top-0 md:left-5 md:right-5 xl:max-w-7xl mx-auto font-sans bg-[#97979733]/20 backdrop-blur-[80px] 
+  class="container fixed top-0 md:left-5 md:right-5 xl:max-w-7xl mx-auto font-sans bg-[#97979733]/20 backdrop-blur-[80px]
     rounded-b-xl py-2 px-5 flex justify-between items-center z-50"
 >
   <div class="w-26 z-50">
-    <a href={`/${lang}/`}><Image src={logo} width="100" height="40" alt="OV logo" /></a>
+    <a href={`/${lang}/`}
+      ><Image
+        src="/images/logo.webp"
+        width="100"
+        height="40"
+        alt="OV logo"
+      /></a
+    >
   </div>
 
   <div class="flex hover:cursor-default">
@@ -28,7 +33,7 @@ const t = useTranslations(lang);
     >
       <Image
         id="menu-icon"
-        src="/public/images/menu.svg"
+        src="/images/menu.svg"
         width="34"
         height="34"
         alt="menu"
@@ -36,31 +41,49 @@ const t = useTranslations(lang);
       <div class="relative hover:cursor-default">
         <div
           id="main-menu"
-          class="menu bg-[#040404]/[98%] hidden overflow-y-auto animation z-40 fixed left-0 right-0 top-[62px] 
+          class="menu bg-[#040404]/[98%] hidden overflow-y-auto animation z-40 fixed left-0 right-0 top-[62px]
             h-full min-h-screen w-full lg:min-h-[120px] max-w-[1120px] mx-auto rounded-xl"
         >
-          <Picture
-            src={blur}
+          <Image
+            src="/images/bg.svg"
             class="absolute blur-[100px] top-0 bottom-0 left-0 right-0 m-auto h-full w-full object-cover object-center z-[-1]"
+            width="100"
+            height="100"
             alt="blur background"
-            formats={["avif", "webp"]}
           />
           <div class="block">
-            <ul class="text-5xl lg:text-3xl font-black grid lg:grid-flow-col gap-y-10 lg:gap-y-0 lg:gap-x-10 
-              place-content-center lg:place-content-arround my-auto content-start uppercase lg:content-center 
+            <ul
+              class="text-5xl lg:text-3xl font-black grid lg:grid-flow-col gap-y-10 lg:gap-y-0 lg:gap-x-10
+              place-content-center lg:place-content-arround my-auto content-start uppercase lg:content-center
               h-full max-h-[120px] text-white mt-40 lg:mt-10"
             >
-              <li class="hover:scale-110 duration-150 transition-all hover:cursor-pointer">
-                <a href={`/${lang}/`} class="hover-link active"> {t('nav.home')} </a>
+              <li
+                class="hover:scale-110 duration-150 transition-all hover:cursor-pointer"
+              >
+                <a href={`/${lang}/`} class="hover-link active">
+                  {t("nav.home")}
+                </a>
               </li>
-              <li class="hover:scale-110 duration-150 transition-all hover:cursor-pointer">
-                <a href={`/${lang}/about/`} class="hover-link">  {t('nav.about')} </a>
+              <li
+                class="hover:scale-110 duration-150 transition-all hover:cursor-pointer"
+              >
+                <a href={`/${lang}/about/`} class="hover-link">
+                  {t("nav.about")}
+                </a>
               </li>
-              <li class="hover:scale-110 duration-150 transition-all hover:cursor-pointer">
-                <a href={`/${lang}/experience/`} class="hover-link"> {t('nav.experience')} </a>
+              <li
+                class="hover:scale-110 duration-150 transition-all hover:cursor-pointer"
+              >
+                <a href={`/${lang}/experience/`} class="hover-link">
+                  {t("nav.experience")}
+                </a>
               </li>
-              <li class="hover:scale-110 duration-150 transition-all hover:cursor-pointer">
-                <a href={`/${lang}/portfolio/`} class="hover-link"> {t('nav.portfolio')} </a>
+              <li
+                class="hover:scale-110 duration-150 transition-all hover:cursor-pointer"
+              >
+                <a href={`/${lang}/portfolio/`} class="hover-link">
+                  {t("nav.portfolio")}
+                </a>
               </li>
             </ul>
           </div>

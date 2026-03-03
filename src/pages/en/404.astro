@@ -3,14 +3,15 @@ import { Image } from "astro:assets";
 import blur from "/public/images/bg.png";
 import Layout from "@layouts/Layout.astro";
 import Head from "@components/Head.astro";
-import { getAbsoluteLocaleUrl } from "astro:i18n";
+// import { getAbsoluteLocaleUrl } from "astro:i18n";
 
-getAbsoluteLocaleUrl("en");
-export const prerender = true;
+// getAbsoluteLocaleUrl("en");
+// export const prerender = true;
 ---
 
-<Head title="Error 404" />
-<Layout>
+<Layout
+title="Error 404"
+>
   <section
     class="min-h-screen grid gap-5 px-3 lg:px-0 place-content-center place-items-center content-center tracking-wide text-white"
   >
