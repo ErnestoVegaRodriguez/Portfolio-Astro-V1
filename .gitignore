@@ -5,6 +5,7 @@ functions/
 # generated types
 .astro/
 .dist/
+.functions/
 .vercel/
 # dependencies
 node_modules/
