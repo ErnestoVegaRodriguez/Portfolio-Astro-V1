@@ -1,0 +1,65 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Head from "@/components/Head.astro";
+import Title from "@/components/Title.astro";
+import { Image } from "astro:assets";
+import blur from "/src/assets/img/bg.png";
+import ucr from "/src/assets/img/ucr-logo.jfif";
+import cyberpro from "/src/assets/img/cyberprocr-logo.jfif";
+import ExperienceCard from "@/components/ExperienceCard.astro";
+import { getAbsoluteLocaleUrl } from "astro:i18n";
+
+getAbsoluteLocaleUrl("es");
+export const prerender = true;
+---
+
+<Head
+  title="Experiencia"
+  description="Experiencia profesional y académica de Ernesto Vega"
+  author="Ernesto Vega Rodriguez"
+/>
+<Layout class="relative">
+  <div class="grid mt-[11.1111%] content-center">
+    <Title text="Experiencia" />
+  </div>
+
+  <section class="grid px-3 lg:px-0 content-start text-white mb-[5rem]">
+    <Image
+      src={blur}
+      class="fixed top-0 bottom-0 left-0 right-0 m-auto h-full w-full object-cover object-center z-[-1]"
+      alt="blur background"
+    />
+
+    <div class="grid grid-rows-auto content-center gap-5 mt-12">
+      <ExperienceCard
+        company="CyberProCr"
+        avatar={cyberpro}
+        position="Desarrollador FullStack"
+        period="Ago 2025 - Dic 2025"
+        location="Remoto Juan Viña, Cartago, Costa Rica"
+        description={[
+          "",
+          "Ejecuté el análisis de requerimientos y el desarrollo de módulos CRUD.",
+          "Refactoricé la interfaz de usuario de proyectos mediante Tailwind CSS, implementando un diseño responsive.",
+          "Implementé funcionalidades con el uso de modelos de inteligencia artificial mediante plataformas como Pinecone.",
+        ]}
+        technologies={["JavaScript", "Tailwind CSS", "ASP.NET", "C#", "SQL"]}
+      />
+
+      <ExperienceCard
+        company="Universidad de Costa Rica"
+        avatar={ucr}
+        position="Estudiante de bachillerato"
+        period="Ene 2024 - Jun 2025"
+        location="Turrialba, Cartago, Costa Rica"
+        description={[
+          "",
+          "Lideré y colaboré en el desarrollo utilizando metodologías Scrum y RUP, gestionando tareas a través de Trello.",
+          "Desarrollé la estructura de bases de datos e implementé funciones relacionadas.",
+          "Implementé diferentes proyectos de frontend, y desarrollé múltiples servicios RESTful.",
+        ]}
+        technologies={["Angular", ".NET", "SQL", "Trello"]}
+      />
+    </div>
+  </section>
+</Layout>

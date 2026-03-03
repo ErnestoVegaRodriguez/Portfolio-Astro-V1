@@ -1,0 +1,206 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Head from "@/components/Head.astro";
+import { Picture, Image } from "astro:assets";
+import blur from "/src/assets/img/bg.png";
+import cover from "/src/assets/img/ernesto-vega-main.jpeg";
+import Button from "@/components/Button.astro";
+import { getRelativeLocaleUrl, getAbsoluteLocaleUrl } from "astro:i18n";
+
+getAbsoluteLocaleUrl("es");
+export const prerender = true;
+
+const blogURL = getRelativeLocaleUrl("es", "blog");
+---
+
+<Head
+  title="Ernesto Vega — Desarrollador de software"
+  description="Soy un desarrollador de software de Cartago, Costa Rica. Me enfoco en escritura de código mantenible, buenas prácticas de arquitectura y colaboración en equipo."
+  author="Ernesto Vega Rodriguez"
+/>
+<Layout>
+  <!-- HERO -->
+
+  <section
+    class="grid gap-x-10 gap-y-10 lg:gap-y-0 place-content-center content-center lg:grid-flow-col lg:auto-cols-max lg:mt-[8rem] 2xl:mt-[12rem] mb-[5rem] px-3 lg:px-0 h-full text-white"
+  >
+    <Image
+      src={blur}
+      class="fixed top-0 bottom-0 left-0 right-0 m-auto h-full w-full object-cover object-center z-[-1]"
+      alt="blur background"
+    />
+
+    <div>
+      <div class="atropos my-atropos">
+        <div class="atropos-scale">
+          <div class="atropos-rotate">
+            <div
+              class="atropos-inner blur-bg rounded-xl p-4 lg:px-10 lg:py-7 mt-[8rem] xs:mt-[10rem] sm:mt-[12rem] md:mt-[10rem] lg:mt-0 w-full max-w-[600px]"
+            >
+              <div class="atropos-text">
+                <h1
+                  class="text-7xl lg:text-9xl font-black bg-clip-text text-transparent bg-gradient-to-r from-primary-0 to-accent-0"
+                >
+                  Hola soy Ernesto Vega Full Stack
+                </h1>
+              </div>
+
+              <div
+                class="atropos-text text-xl font-extralight lg:max-w-6xl mt-5 lg:mt-10"
+              >
+                <blockquote>
+                  Diseño soluciones eficientes enfocadas en código mantenible,
+                  buenas prácticas de arquitectura y colaboración en equipo.
+                  Desarrollador full stack de Cartago, Costa Rica, apasionado
+                  por crear software de calidad. Busco resolver problemas
+                  complejos con creatividad y precisión técnica.
+                </blockquote>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="atropos my-atropos">
+        <div class="atropos-scale">
+          <div class="atropos-rotate">
+            <div
+              class="atropos-inner self-start blur-bg rounded-xl p-4 lg:p-10 w-full max-w-[400px]"
+            >
+              <Picture
+                src={cover}
+                class="mx-auto object-cover rounded-xl h-[300px]"
+                alt="cover"
+                formats={["avif", "webp"]}
+              />
+              <p
+                class="atropos-text text-xl font-extralight tracking-wide mt-5"
+              >
+                Soy un desarrollador apasionado por crear soluciones innovadoras
+                y código limpio. Aquí encontrarás mis proyectos, experiencia y
+                reflexiones sobre desarrollo de software.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="atropos">
+        <div class="atropos-scale">
+          <div class="atropos-rotate">
+            <div class="atropos-inner">
+              <div
+                class="mt-5 flex flex-col gap-4 place-content-center place-items-center blur-bg rounded-xl p-4 lg:p-10 w-full max-w-[400px]"
+              >
+                <!-- social icons -->
+                <div class="flex gap-4 justify-center items-center">
+                  <a
+                    href="https://github.com/ErnestoVegaRodriguez"
+                    target="_blank"
+                    class="hover:bg-primary-0 duration-150 rounded-xl p-2 flex items-center justify-center"
+                  >
+                    <Image
+                      class="w-10 h-10 lg:w-12 lg:h-12"
+                      src="/src/assets/img/github.svg"
+                      width="48"
+                      height="48"
+                      alt="ernesto vega github"
+                    />
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/ernesto224"
+                    target="_blank"
+                    class="hover:bg-primary-0 duration-150 rounded-xl p-2 flex items-center justify-center"
+                  >
+                    <Image
+                      class="w-10 h-10 lg:w-12 lg:h-12"
+                      src="/src/assets/img/linkedin.svg"
+                      width="48"
+                      height="48"
+                      alt="ernesto vega linkedin"
+                    />
+                  </a>
+                  <a
+                    href="mailto:ev402648@gmail.com"
+                    target="_blank"
+                    class="hover:bg-primary-0 duration-150 rounded-xl p-2 flex items-center justify-center"
+                  >
+                    <svg
+                      class="w-10 h-10 lg:w-12 lg:h-12"
+                      fill="none"
+                      stroke="#ffffff"
+                      stroke-width="1.2"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                      aria-hidden="true"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
+                      ></path>
+                    </svg>
+                  </a>
+                  <!-- download button -->
+                  <div class="lg:block hidden">
+                    <Button
+                      text="Descargar CV"
+                      link="/ernesto-vega-rodriguez-cv.pdf"
+                      target="_blank"
+                      showIcon={false}
+                    />
+                  </div>
+                </div>
+                <!-- download button -->
+                <div class="lg:hidden sm:block">
+                  <Button
+                    text="Descargar CV"
+                    link="/ernesto-vega-rodriguez-cv.pdf"
+                    target="_blank"
+                    showIcon={false}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <link rel="stylesheet" href="/styles/atropos.min.css" />
+
+  <style>
+    /* deshabilitar eventos de puntero en las capas que rotan para que la animación no bloquee clics */
+    .atropos .atropos-inner {
+      pointer-events: none;
+    }
+    /* volver a habilitar eventos en todos los descendientes (enlaces, botones, etc.)
+       y garantizar que estén por encima de la animación usando z-index */
+    .atropos .atropos-inner * {
+      pointer-events: auto !important;
+      position: relative;
+      z-index: 1;
+    }
+  </style>
+
+  <script>
+    import Atropos from "atropos";
+
+    if (window.innerWidth > 1024) {
+      const elements = document.querySelectorAll(".my-atropos");
+
+      elements.forEach((el) => {
+        Atropos({
+          el: el as HTMLElement,
+          highlight: false,
+          activeOffset: 0,
+          shadowOffset: 0,
+          shadowScale: 0,
+        });
+      });
+    }
+  </script>
+</Layout>

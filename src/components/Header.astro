@@ -1,113 +1,74 @@
 ---
-import { Image } from "astro:assets";
-import type { HeaderProps } from "@types";
+import { Image, Picture } from "astro:assets";
+import logo from "/src/assets/img/logo.webp";
+import blur from "/src/assets/img/bg.svg";
+import SwitchLang from "./SwitchLang.astro";
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
 
-type Props = HeaderProps;
-
-const { siteLogo, navLinks } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
-<header
-  class="sticky top-0 z-50 mx-auto flex max-w-5xl animate-slide-in justify-between bg-black px-5 py-6"
+<!-- HEADER -->
+<nav
+  transition:persist="nav"
+  transition:name="nav"
+  class="container fixed top-0 md:left-5 md:right-5 xl:max-w-7xl mx-auto font-sans bg-[#97979733]/20 backdrop-blur-[80px] 
+    rounded-b-xl py-2 px-5 flex justify-between items-center z-50"
 >
-  <a href="#hero" aria-label="Home link">
-    <Image
-      class="rounded-full"
-      src={siteLogo}
-      width="45"
-      height="45"
-      alt="website logo"
-    />
-  </a>
+  <div class="w-26 z-50">
+    <a href={`/${lang}/`}><Image src={logo} width="100" height="40" alt="OV logo" /></a>
+  </div>
 
-  <button
-    type="button"
-    id="menu-button"
-    class="px-1.5 text-neutral sm:hidden"
-    aria-expanded="false"
-    aria-controls="main-menu"
-  >
-    <i class="w-8 h-8 icon-[gg--menu-right] gap-x-0 gap-y-0"></i>
-  </button>
-
-  <nav
-    class="absolute top-20 right-5 hidden rounded-xl border border-neutral/40 bg-black 
-      px-4 py-5 text-neutral sm:static sm:block sm:border-0 sm:bg-transparent sm:p-0"
-    id="main-menu"
-  >
-    <ul class="gap-2 sm:flex">
-      {
-        navLinks.map((link) => (
-          <li class="relative">
-            <a
-              class={`nav-item relative block p-2 text-sm font-medium transition-all duration-500 
-                after:absolute after:bottom-0 after:left-2/4 after:h-2 after:w-1 after:-translate-x-2/4 
-                after:text-primary after:opacity-0 after:content-['•'] hover:text-white`}
-              href={link.href}
+  <div class="flex hover:cursor-default">
+    <button
+      transition:persist
+      id="menu-image"
+      class="z-50 p-2 rounded-lg transition-colors duration-150 hover:bg-zinc-800 justify-self-end hover:cursor-pointer"
+    >
+      <Image
+        id="menu-icon"
+        src="/src/assets/img/menu.svg"
+        width="34"
+        height="34"
+        alt="menu"
+      />
+      <div class="relative hover:cursor-default">
+        <div
+          id="main-menu"
+          class="menu bg-[#040404]/[98%] hidden overflow-y-auto animation z-40 fixed left-0 right-0 top-[62px] 
+            h-full min-h-screen w-full lg:min-h-[120px] max-w-[1120px] mx-auto rounded-xl"
+        >
+          <Picture
+            src={blur}
+            class="absolute blur-[100px] top-0 bottom-0 left-0 right-0 m-auto h-full w-full object-cover object-center z-[-1]"
+            alt="blur background"
+            formats={["avif", "webp"]}
+          />
+          <div class="block">
+            <ul class="text-5xl lg:text-3xl font-black grid lg:grid-flow-col gap-y-10 lg:gap-y-0 lg:gap-x-10 
+              place-content-center lg:place-content-arround my-auto content-start uppercase lg:content-center 
+              h-full max-h-[120px] text-white mt-40 lg:mt-10"
             >
-              {link.text}
-            </a>
-          </li>
-        ))
-      }
-    </ul>
-  </nav>
-</header>
-
-<script>
-  // Toggle mobile menu
-  const button = document.querySelector("#menu-button");
-  const menu = document.querySelector("#main-menu");
-  const navItems = document.querySelectorAll("#main-menu > ul > li > a");
-
-  const toggleMenu = () => {
-    menu?.classList.toggle("hidden");
-    const isHidden = menu?.classList.contains("hidden");
-    button?.setAttribute("aria-expanded", `${!isHidden}`);
-  };
-
-  button?.addEventListener("click", toggleMenu);
-  navItems.forEach((item) => {
-    item?.addEventListener("click", toggleMenu);
-  });
-
-  // Update navigation based on scroll position with Intersection Observer
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          navItems.forEach((item) => {
-            if (item.getAttribute("href") === `#${entry.target.id}`) {
-              item.classList.add("text-white", "md:after:opacity-100");
-            } else {
-              item.classList.remove("text-white", "md:after:opacity-100");
-            }
-          });
-        }
-      });
-    },
-    { threshold: 0.3 }
-  );
-
-  document.querySelectorAll("section").forEach((section) => {
-    observer.observe(section);
-  });
-
-  // Cleanup observer
-  document.onvisibilitychange = () => {
-    if (document.visibilityState === "hidden") {
-      observer.disconnect();
-    } else {
-      document.querySelectorAll("section").forEach((section) => {
-        observer.observe(section);
-      });
-    }
-  };
-</script>
-
-<style>
-  header {
-    animation-timeline: scroll();
-    animation-range: 0 650px;
-  }
-</style>
+              <li class="hover:scale-110 duration-150 transition-all hover:cursor-pointer">
+                <a href={`/${lang}/`} class="hover-link active"> {t('nav.home')} </a>
+              </li>
+              <li class="hover:scale-110 duration-150 transition-all hover:cursor-pointer">
+                <a href={`/${lang}/about/`} class="hover-link">  {t('nav.about')} </a>
+              </li>
+              <li class="hover:scale-110 duration-150 transition-all hover:cursor-pointer">
+                <a href={`/${lang}/experience/`} class="hover-link"> {t('nav.experience')} </a>
+              </li>
+              <li class="hover:scale-110 duration-150 transition-all hover:cursor-pointer">
+                <a href={`/${lang}/portfolio/`} class="hover-link"> {t('nav.portfolio')} </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </button>
+    <div class="self-center mx-5 pl-5 border-l-[1px] border-white/30">
+      <SwitchLang class="bg-transparent hover:cursor-pointer" />
+    </div>
+  </div>
+</nav>

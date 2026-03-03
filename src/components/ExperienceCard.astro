@@ -1,0 +1,88 @@
+---
+interface Props {
+  company: string;
+  position: string;
+  period: string;
+  location?: string;
+  description: string | string[];
+  avatar?: string; // URL of company/logo
+  technologies?: string[];
+}
+
+const {
+  company,
+  position,
+  period,
+  location,
+  description,
+  avatar,
+  technologies = [],
+} = Astro.props;
+import Badge from "./BadgeLink.astro";
+---
+
+<div
+  class="blur-bg rounded-xl px-6 py-5 lg:px-10 lg:py-8 hover:bg-[#ffffff11] transition-all duration-300"
+>
+  <div
+    class="flex flex-col lg:flex-row lg:justify-between lg:items-start gap-4 mb-4"
+  >
+    <div class="flex items-center gap-4">
+      {
+        avatar && (
+          <img
+            src={avatar}
+            alt={`${company} logo`}
+            class="w-16 h-16 lg:w-20 lg:h-20 rounded-full object-cover ring-4 ring-white/80"
+          />
+        )
+      }
+      <div>
+        <h3
+          class="font-black bg-clip-text text-transparent bg-gradient-to-r from-primary-0 to-accent-0 text-3xl lg:text-4xl"
+        >
+          {position}
+        </h3>
+        <p class="text-lg font-semibold text-white/80 mt-2">{company}</p>
+        {location && (
+          <p class="text-sm text-white/70 mt-1">{location}</p>
+        )}
+      </div>
+    </div>
+    <span class="text-sm font-medium text-white/60 whitespace-nowrap">
+      {period}
+    </span>
+  </div>
+
+  {
+    Array.isArray(description) ? (
+      <div class="p-4">
+        {/* first element as general description paragraph */}
+        <p class="text-xl font-light text-white/80 leading-relaxed mb-3">
+          {description[0]}
+        </p>
+        {description.length > 1 && (
+          <div class="text-xl font-light text-white/80 leading-relaxed mb-5 ml-5 space-y-2">
+            {description.slice(1).map((item) => (
+              <p>• {item}</p>
+            ))}
+          </div>
+        )}
+      </div>
+    ) : (
+      <p class="text-xl font-light text-white/80 leading-relaxed mb-5">
+        {description}
+      </p>
+    )
+  }
+
+  {
+    technologies.length > 0 && (
+      <ul class="flex text-base gap-2 lg:gap-3 flex-wrap space-x-2 space-y-2 xs:space-y-0">
+        {technologies.map((tech, index) => (
+          <Badge key={index} text={tech} />
+        ))}
+      </ul>
+    )
+  }
+</div>

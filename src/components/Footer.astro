@@ -1,34 +1,85 @@
 ---
-import type { SiteConfig } from "@types";
+import github from '/src/assets/img/github.svg';
+import linkedin from "/src/assets/img/linkedin.svg";
+import { Image } from 'astro:assets';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
 
-type Props = Pick<SiteConfig, "author" | "socialLinks">;
-
-const { author, socialLinks } = Astro.props;
-const currentYear = new Date().getFullYear();
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
-<footer
-  class="w-full border-t border-neutral/20 px-5 pt-5 pb-8 text-center text-white"
->
-  <ul class="mb-5 flex flex-wrap justify-center gap-x-5 text-xs">
-    {
-      socialLinks.map(({ text, href }) => (
-        <li>
-          <a
-            href={href}
-            target="_blank"
-            class="inline-block px-4 py-3 hover:text-primary"
-          >
-            {text}
-            <i class="relative -bottom-1 w-5 h-5 icon-[material-symbols--arrow-outward-rounded]" />
-          </a>
-        </li>
-      ))
-    }
-  </ul>
-  <p class="text-xs">
-    {author} © {currentYear}. <span class="text-neutral"
-      >Designed & Developed by</span
-    > Moisés Machuca
-  </p>
+<footer class='py-3 px-5 lg:py-5 lg:px-10'>
+	<div class='horizontal-line'></div>
+	<div class='flex justify-between items-center'>
+		<div>
+			<h4 class='font-light text-sm lg:text-lg'>
+				<div set:html={t('footer.copyright')}></div>
+			</h4>
+		</div>
+		<div class='flex lg:space-x-1 items-center'>
+			<a
+				href='https://github.com/ErnestoVegaRodriguez'
+				target='_blank'>
+				<div class='hover:bg-primary-0 duration-150 rounded-xl px-2 py-2'>
+					<Image
+						class='inline-block w-6 lg:w-8'
+						src={github}
+						width='40'
+						height='40'
+						alt='ernesto vega github'
+					/>
+				</div>
+			</a>
+			<a
+				href='https://www.linkedin.com/in/ernesto224'
+				target='_blank'>
+				<div class='hover:bg-primary-0 duration-150 rounded-xl px-2 py-2'>
+					<Image
+						class='inline-block w-6 lg:w-8'
+						src={linkedin}
+						width='40'
+						height='40'
+						alt='ernesto vega linkedin'
+					/>
+				</div>
+			</a>
+			<a
+				href='mailto:ev402648@gmail.com'
+				target='_blank'>
+				<div class='hover:bg-primary-0 duration-150 rounded-xl px-2 py-2'>
+					<svg
+						class='inline-block w-6 lg:w-8'
+						fill='none'
+						stroke='#ffffff'
+						stroke-width='1.2'
+						viewBox='0 0 24 24'
+						xmlns='http://www.w3.org/2000/svg'
+						aria-hidden='true'>
+						<path
+							stroke-linecap='round'
+							stroke-linejoin='round'
+							d='M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75'
+						></path>
+					</svg>
+				</div>
+			</a>
+		</div>
+	</div>
 </footer>
+
+<script transition:persist>
+document.addEventListener('astro:page-load', () => {
+	// Получение текущей даты
+	let currentDate = new Date();
+	// Извлечение текущего года из объекта даты
+	let currentYear = currentDate.getFullYear();
+	// Получение элемента по идентификатору
+	let yearElement = document.getElementById('currentYear');
+	// Проверка существования элемента перед установкой его textContent
+	if (yearElement !== null) {
+		yearElement.textContent = String(currentYear);
+	} else {
+		console.error("Element with ID 'currentYear' not found.");
+	}
+});
+</script>

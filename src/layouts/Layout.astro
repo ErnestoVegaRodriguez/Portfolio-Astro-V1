@@ -1,44 +1,18 @@
 ---
-import "@fontsource/be-vietnam-pro";
-import "@fontsource-variable/gabarito";
-import { SITE_CONFIG } from "@config";
-import Header from "@components/Header.astro";
-import Footer from "@components/Footer.astro";
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import { getLangFromUrl } from '@/i18n/utils';
 
-const {
-  title,
-  description,
-  siteLogo,
-  navLinks,
-  lang,
-  author,
-  socialLinks,
-  socialImage,
-  canonicalURL = new URL(Astro.url.pathname, Astro.site).href,
-} = SITE_CONFIG;
-
-const ogImgUrl = canonicalURL + socialImage;
+const lang = getLangFromUrl(Astro.url);
 ---
+<html lang={lang}>
 
-<!doctype html>
-<html lang={lang} class="scroll-pt-16 scroll-smooth">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="description" content={description} />
-    <meta name="author" content={author} />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-    <link rel="manifest" href="/site.webmanifest" />
-    <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
-  </head>
-  <body class="bg-black font-sans">
-    <Header siteLogo={siteLogo} navLinks={navLinks} />
-    <main class="mx-auto max-w-3xl px-5">
-      <slot />
-    </main>
-    <Footer author={author} socialLinks={socialLinks} />
-  </body>
+<body
+	class='cursor-default relative container xl:max-w-7xl font-sans md:px-5 mx-auto tracking-wide text-zinc-200 bg-[#040404]'>
+	<Header />
+	<div class='md:flex md:flex-col md:min-h-full'>
+		<slot />
+	</div>
+	<Footer />
+</body>
 </html>

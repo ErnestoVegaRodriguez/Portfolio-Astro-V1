@@ -1,0 +1,128 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Head from "@/components/Head.astro";
+import Title from "@/components/Title.astro";
+import { Image, Picture } from "astro:assets";
+import me from "/src/assets/img/ernesto-vega.jpeg";
+import blur from "/src/assets/img/bg.png";
+import Badge from "@/components/BadgeLink.astro";
+import { getAbsoluteLocaleUrl } from "astro:i18n";
+
+getAbsoluteLocaleUrl("en");
+export const prerender = true;
+---
+
+<Head
+  title="About"
+  description="Learn more about my journey and skills as a software developer."
+  author="Ernesto Vega Rodriguez"
+/>
+<Layout class="relative">
+  <div class="grid mt-[11.1111%] content-center">
+    <Title text="About" />
+  </div>
+  <!-- ABOUT ME -->
+  <section class="grid content-start px-3 lg:px-0 mb-[5rem] text-white">
+    <Image
+      src={blur}
+      class="fixed top-0 bottom-0 left-0 right-0 m-auto h-full w-full object-cover object-center z-[-1]"
+      alt="blur background"
+    />
+    <div class="grid grid-flow-col auto-cols-auto content-center mt-12">
+      <div class="grid lg:grid-cols-2 blur-bg rounded-xl p-5 lg:py-24 lg:px-16">
+        <div class="grid justify-center content-center mb-5 lg:mb-0">
+          <Picture
+            class="object-cover rounded-full ring-8 ring-white/80 w-full h-full max-w-[200px] max-h-[200px] lg:max-w-[250px] lg:max-h-[250px]"
+            src={me}
+            formats={["avif", "webp"]}
+            width="300"
+            height="300"
+            alt="Ernesto Vega"
+          />
+        </div>
+
+        <div class="grid justify-center content-center">
+          <h6
+            class="text-4xl lg:text-5xl font-black bg-clip-text text-transparent bg-gradient-to-r from-primary-0 to-accent-0"
+          >
+            Ernesto Vega
+          </h6>
+          <div class="text-xl font-light text-zinc-200 max-w-xl mt-5">
+            <p>
+              I'm Ernesto Vega, a full‑stack developer with solid academic
+              training and a passion for building efficient, reliable
+              solutions. I enjoy working across the entire technology stack,
+              from robust backend architectures to intuitive frontend
+              interfaces, always prioritizing security and technical
+              excellence.
+            </p>
+            <p class="mt-5">
+              I am proactive, collaborative, and committed to continuous
+              learning and improvement. I approach complex challenges with
+              creativity and precision, delivering maintainable code and
+              scalable systems that drive real value.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-5">
+      
+      <div
+        class="grid grid-cols-1 lg:grid-cols-2 content-center justify-center text-zinc-200 blur-bg rounded-xl p-5 mb-5"
+      >
+        <div class="grid content-center">
+          <h2
+            class="text-5xl font-black text-center bg-clip-text text-transparent bg-gradient-to-r from-primary-0 to-accent-0"
+          >
+            Habilidades
+          </h2>
+        </div>
+        <div class="py-5 text-base grid content-center">
+          <ul class="flex flex-wrap gap-2 lg:gap-3 justify-center">
+            {
+              [
+                "Java",
+                "C#",
+                "C++",
+                "JavaScript",
+                "PHP",
+                "Python",
+                "HTML5",
+                "CSS3",
+                "Bootstrap",
+                "Tailwind CSS",
+                "Astro",
+                "Angular",
+                "React",
+                "Next.js",
+                "Ionic",
+                ".NET",
+                "Node.js",
+                "Express",
+                "Spring Boot",
+                "Prisma ORM",
+                "MongoDB",
+                "SQL Server",
+                "MySQL",
+                "PostgreSQL",
+                "SQLite",
+                "DevOps",
+                "Git",
+                "GitHub",
+                "Docker",
+                "Vercel",
+                "Cloud",
+                "Visual Studio Code",
+                "ChatGPT",
+                "Claude",
+              ].map((s) => <Badge text={s} />)
+            }
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</Layout>

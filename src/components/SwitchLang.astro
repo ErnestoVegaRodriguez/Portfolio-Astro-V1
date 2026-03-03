@@ -1,0 +1,85 @@
+---
+import { languages } from "@/i18n/ui";
+---
+
+<div class="lang-selector flex gap-2 items-center">
+  {
+    Object.entries(languages).map(([lang, label]) => (
+      <button
+        class="lang-btn px-3 py-1.5 rounded-full text-sm font-medium transition-all duration-200 border"
+        data-lang={lang}
+        title={label}
+      >
+        {lang.toUpperCase()}
+      </button>
+    ))
+  }
+</div>
+
+<script type="text/javascript">
+  let selectedLang = document.cookie.replace(
+    /(?:(?:^|.*;\s*)selectedLang\s*\=\s*([^;]*).*$)|^.*$/,
+    "$1"
+  );
+  
+  // If cookie selectedLang is not set, default to en
+  if (!selectedLang) {
+    selectedLang = "en";
+    document.cookie = "selectedLang=" + selectedLang + "; path=/";
+  }
+
+  const langButtons = document.querySelectorAll(".lang-btn");
+
+  // Update button styles based on current language
+  function updateButtonStyles() {
+    langButtons.forEach((btn) => {
+      const btnLang = btn.getAttribute("data-lang");
+      if (btnLang === selectedLang) {
+        btn.classList.remove("bg-transparent", "border-white/40", "text-white/70", "hover:text-white");
+        btn.classList.add("bg-gradient-to-r", "from-primary-0", "to-accent-0", "border-primary-0", "text-white");
+      } else {
+        btn.classList.remove("bg-gradient-to-r", "from-primary-0", "to-accent-0", "border-primary-0");
+        btn.classList.add("bg-transparent", "border-white/40", "text-white/70", "hover:text-white", "hover:border-white/60");
+      }
+    });
+  }
+
+  // Set initial styles
+  updateButtonStyles();
+
+  // Add click handlers
+  langButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const newLang = btn.getAttribute("data-lang");
+      document.cookie = "selectedLang=" + newLang + "; path=/";
+      selectedLang = newLang;
+
+      // Update styles
+      updateButtonStyles();
+
+      // Navigate
+      let newPath = window.location.pathname.replace(
+        /\/[a-z]{2}\//,
+        "/" + newLang + "/"
+      );
+      if (newPath.includes("/blog/")) {
+        newPath = newPath.substring(0, newPath.indexOf("/blog/") + 6);
+      }
+      window.location.href = newPath;
+    });
+  });
+</script>
+
+<style>
+.lang-selector {
+  @apply flex-wrap sm:flex-nowrap;
+}
+
+.lang-btn {
+  @apply transition-all duration-300 cursor-pointer;
+}
+
+.lang-btn:hover:not([class*="bg-gradient"]) {
+  @apply border-white/60;
+}
+</style>

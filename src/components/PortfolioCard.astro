@@ -1,0 +1,183 @@
+---
+import { Picture } from "astro:assets";
+import BadgeLink from "./BadgeLink.astro";
+import Badge from "./Badge.astro";
+import Button from "./Button.astro";
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+let { description, title, img, site, codeLink, badgeLinkProps, badgeProps } =
+  Astro.props;
+
+// Support both single image and array of images
+const images = Array.isArray(img) ? img : [img];
+const carouselId = `carousel-${Math.random().toString(36).substr(2, 9)}`;
+---
+
+<div class="grid blur-bg p-5 lg:p-10 rounded-xl">
+  <div class="grid lg:grid-cols-2">
+    <div class="grid self-start relative">
+      <!-- Carousel container -->
+      <div class="relative overflow-hidden rounded-2xl w-full h-[350px]">
+        {
+          images.map((image, index) => (
+            <div
+              class={`carousel-slide-${carouselId} absolute inset-0 transition-all duration-700 ease-in-out`}
+            >
+              <Picture
+                class="object-cover object-center w-full h-full rounded-2xl"
+                src={image}
+                width="500"
+                height="350"
+                alt={`${title} - ${index + 1}`}
+                formats={["avif", "webp"]}
+              />
+            </div>
+          ))
+        }
+        {
+          images.length > 1 && (
+            <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2 justify-center p-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 shadow-md z-10">
+              {images.map((_, index) => (
+                <button
+                  class={`dot-${carouselId} dot-btn h-2 w-2 rounded-full transition-all duration-300 flex-shrink-0 ${
+                    index === 0
+                      ? "bg-gradient-to-r from-primary-0 to-accent-0 w-6 ring-2 ring-black/25 shadow-lg"
+                      : "bg-black/40 hover:bg-black/60 w-2"
+                  }`}
+                  data-slide={index}
+                  aria-label={`Go to slide ${index + 1}`}
+                />
+              ))}
+            </div>
+          )
+        }
+      </div>
+    </div>
+    <div class="lg:ml-10">
+      <h3
+        class="font-black bg-clip-text text-transparent bg-gradient-to-r from-primary-0 to-accent-0 text-3xl lg:text-4xl mb-5 mt-3 lg:mt-0"
+      >
+        {title}
+      </h3>
+      <p class="inline-flex text-xl font-light">
+        {description}
+      </p>
+      <div class="py-5">
+        <h4 class="text-base mb-5 font-thin">{t("portfolio.subDesc")}</h4>
+        <ul class="flex flex-wrap gap-2 lg:gap-3 space-x-2 space-y-2 xs:space-y-0">
+          {
+            Array.isArray(badgeLinkProps) ? (
+              badgeLinkProps.map((badgeLink, index) => (
+                <BadgeLink key={index} {...badgeLink} />
+              ))
+            ) : (
+              <BadgeLink {...badgeLinkProps} />
+            )
+          }
+
+          { badgeProps ? (
+            Array.isArray(badgeProps) ? (
+              badgeProps.map((badge, index) => <Badge key={index} {...badge} />)
+            ) : (
+              <Badge {...badgeProps} />
+            )) : null
+          }
+        </ul>
+      </div>
+      <div class="mt-5 flex gap-3">
+        {site && <Button text={t("portfolio.externalButton")} link={site} />}
+        {codeLink && <Button text="Code" link={codeLink} />}
+      </div>
+    </div>
+  </div>
+</div>
+
+<script define:vars={{ carouselId, imageCount: images.length }}>
+  if (imageCount > 1) {
+    let currentSlide = 0;
+    const slides = document.querySelectorAll(`.carousel-slide-${carouselId}`);
+    const dots = document.querySelectorAll(`.dot-${carouselId}`);
+
+    function showSlide(n) {
+      const slideIndex = (n + imageCount) % imageCount;
+      const diff = slideIndex - currentSlide;
+      const isForward =
+        diff > 0 || (currentSlide > slideIndex && diff < -imageCount / 2);
+
+      // Update slide visibility and position
+      slides.forEach((slide, index) => {
+        if (index === slideIndex) {
+          // Active slide
+          slide.classList.remove("opacity-0");
+          slide.classList.add("opacity-100");
+          slide.style.transform = "translateX(0)";
+          slide.style.zIndex = "1";
+        } else {
+          // Inactive slides
+          slide.classList.add("opacity-0");
+          slide.classList.remove("opacity-100");
+          slide.style.zIndex = "0";
+          // Position offscreen based on direction
+          slide.style.transform = isForward
+            ? "translateX(100%)"
+            : "translateX(-100%)";
+        }
+      });
+
+      // Update active dot
+      dots.forEach((dot, index) => {
+        if (index === slideIndex) {
+          dot.classList.remove("bg-black/40", "w-2");
+          dot.classList.add(
+            "bg-gradient-to-r",
+            "from-primary-0",
+            "to-accent-0",
+            "w-6",
+            "ring-2",
+            "ring-black/25",
+            "shadow-lg",
+          );
+        } else {
+          dot.classList.remove(
+            "bg-gradient-to-r",
+            "from-primary-0",
+            "to-accent-0",
+            "w-6",
+            "ring-2",
+            "ring-black/25",
+            "shadow-lg",
+          );
+          dot.classList.add("bg-black/40", "w-2");
+        }
+      });
+
+      currentSlide = slideIndex;
+    }
+
+    // Initialize first slide
+    slides[0].classList.add("opacity-100");
+    slides[0].style.transform = "translateX(0)";
+    slides[0].style.zIndex = "1";
+
+    slides.forEach((slide, index) => {
+      if (index > 0) {
+        slide.classList.add("opacity-0");
+        slide.style.transform = "translateX(100%)";
+        slide.style.zIndex = "0";
+      }
+    });
+
+    // Auto-advance carousel every 5 seconds
+    setInterval(() => {
+      showSlide(currentSlide + 1);
+    }, 5000);
+
+    // Click handlers for dots
+    dots.forEach((dot, index) => {
+      dot.addEventListener("click", () => showSlide(index));
+    });
+  }
+</script>

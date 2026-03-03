@@ -1,0 +1,109 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Head from "@/components/Head.astro";
+import Title from "@/components/Title.astro";
+import { Image } from "astro:assets";
+import hotel_1 from "/src/assets/img/hotel-jade-website-1.webp";
+import hotel_2 from "/src/assets/img/hotel-jade-website-2.webp";
+import hotel_3 from "/src/assets/img/hotel-jade-website-3.webp";
+import hotel_4 from "/src/assets/img/hotel-jade-website-4.webp";
+import hotel_5 from "/src/assets/img/hotel-jade-website-5.webp";
+import hotel_6 from "/src/assets/img/hotel-jade-website-6.webp";
+import solitel_1 from "/src/assets/img/solitel-website-1.webp";
+import solitel_2 from "/src/assets/img/solitel-website-2.webp";
+import solitel_3 from "/src/assets/img/solitel-website-3.webp";
+import solitel_4 from "/src/assets/img/solitel-website-4.webp";
+import solitel_5 from "/src/assets/img/solitel-website-5.webp";
+import cupones_1 from "/src/assets/img/cupones-max-website-1.webp";
+import cupones_2 from "/src/assets/img/cupones-max-website-2.webp";
+import cupones_3 from "/src/assets/img/cupones-max-website-3.webp";
+import cupones_4 from "/src/assets/img/cupones-max-website-4.webp";
+import cupones_5 from "/src/assets/img/cupones-max-website-5.webp";
+import cupones_6 from "/src/assets/img/cupones-max-website-6.webp";
+import blur from "/src/assets/img/bg.png";
+import PortfolioCard from "@/components/PortfolioCard.astro";
+import { getAbsoluteLocaleUrl } from "astro:i18n";
+
+getAbsoluteLocaleUrl("es");
+export const prerender = true;
+
+let title = Astro.props;
+---
+
+<Head
+  title="Portfolio"
+  description="Proyectos y trabajos destacados de Ernesto Vega"
+  author="Ernesto Vega Rodriguez"
+/>
+<Layout class="relative">
+  <div class="grid mt-[11.1111%] content-center">
+    <Title text="Portafolio" />
+  </div>
+  <!-- ABOUT ME -->
+  <section class="grid px-3 lg:px-0 content-start text-white">
+    <Image
+      src={blur}
+      class="fixed top-0 bottom-0 left-0 right-0 m-auto h-full w-full object-cover object-center z-[-1]"
+      alt="blur background"
+    />
+    <div class="grid grid-rows-auto content-center gap-5 pb-10 mt-12">
+      <PortfolioCard
+        title="Sistema Hotelero Jade"
+        img={[hotel_1, hotel_2, hotel_3, hotel_4, hotel_5, hotel_6]}
+        alt={title}
+        codeLink="https://github.com/ErnestoVegaRodriguez/PROYECTO_INGENIERIA_GRUPO_JAHE_FRONTEND.git"
+        badgeLinkProps={[
+          { text: "TypeScript" },
+          { text: "HTML/CSS" },
+          { text: ".NET 8" },
+          { text: "Angular 18" },
+          { text: "Angular Material" },
+          { text: "Entity Framework Core" },
+          { text: "SQL Server" },
+          { text: "C#" },
+          { text: "Cloudinary" },
+        ]}
+        description="Sistema responsable de gestionar reservas, publicidad y otras áreas de la gestión hotelera. Está compuesto por dos partes: una para clientes, que les permite realizar reservas de habitaciones, y otra para la administración, enfocada en las operaciones hoteleras. Desarrollado con tecnologías Angular, .NET y SQL Server."
+      />
+
+      <PortfolioCard
+        title="Sistema de Gestión de Solicitudes SOLITEL"
+        img={[solitel_1, solitel_2, solitel_3, solitel_4, solitel_5]}
+        alt={title}
+        codeLink="https://github.com/ErnestoVegaRodriguez/Solitel-Frontend.git"
+        badgeLinkProps={[
+          { text: "TypeScript" },
+          { text: "HTML/CSS" },
+          { text: ".NET 8" },
+          { text: "Angular 18" },
+          { text: "Tailwind CSS" },
+          { text: "Entity Framework Core" },
+          { text: "SQL Server" },
+          { text: "C#" },
+        ]}
+        description="Prueba funcional desarrollada desde cero en Angular 18 con componentes independientes. El sistema permite a las entidades gubernamentales registrar y realizar un seguimiento de las solicitudes de interceptación telefónica enviadas a los proveedores de telecomunicaciones. Incluye un diseño completo de frontend y backend como ejemplo de migración tecnológica."
+      />
+
+      <PortfolioCard
+        title="Sistema Cupones Max"
+        img={[cupones_1, cupones_2, cupones_3, cupones_4, cupones_5, cupones_6]}
+        alt={title}
+        codeLink="https://github.com/ErnestoVegaRodriguez/Proyecto2-Sistema-Venta-Cupones.git"
+        badgeLinkProps={[
+          { text: "JavaScript" },
+          { text: "HTML/CSS" },
+          { text: ".NET 8" },
+          { text: "Ionic" },
+          { text: "React" },
+          { text: "Tailwind CSS" },
+          { text: "Entity Framework Core" },
+          { text: "SQL Server" },
+          { text: "C#" },
+          { text: "MySQL" },
+          { text: "PHP" },
+        ]}
+        description="Sistema de venta de cupones que permite a las empresas y al administrador principal gestionar los cupones. Está compuesto por una aplicación móvil en Ionic y un panel administrativo en Angular, conectado a dos APIs desarrolladas en PHP y .NET. Permite registrar, activar y validar cupones conectándose a múltiples bases de datos."
+      />
+    </div>
+  </section>
+</Layout>
